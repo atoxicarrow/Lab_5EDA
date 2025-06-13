@@ -1,0 +1,28 @@
+2.4. Clase ConnectFour
+La clase ConnectFour representa el tablero y la lógica del juego mediante los siguientes
+atributos:
+
+● 1. Atributo grid (char[7][6]): Matriz 7x6 que representa el estado del tablero. Las
+celdas vacías están representadas por el carácter espacio (’ ’).
+
+● 2. Atributo currentSymbol (char): currentSymbol es un caracter que puede tener
+valores X o O. Los valores van alternando trás cada ejecución de makeMove.
+
+
+Los métodos a implementar son:
+
+● 1. Método ConnectFour(): Constructor que inicializa grid con el tablero llenado con
+caracteres de espacio (’ ’) y currentSymbol con el valor X.
+
+● 2. Método makeMove(int z): Intenta realizar un movimiento en la columna indicada
+con el simbolo actual (currentSymbol). Retorna false si la columna se encuentra
+llena (no se puede realizar el movimiento) o si la coordenada es inválida, y true si el
+movimiento pudo realizarse (se puede apilar el símbolo actual dentro de la columna).
+En caso de poder realizar el movimiento solicitado, se actualiza el contenido de grid
+y el valor en currentSymbol. De lo contrario, grid y currentSymbol quedan sin
+modificaciones.
+
+● 3. Método isGameOver(): Verifica si el juego ha terminado, ya sea porque un jugador
+ganó o porque se produjo un empate. Este método debe determinar qué jugador
+ganó, o si el juego quedó en empate. Usted debe definir los parámetros del método
+isGameOver, como asimismo el tipo del valor devuelto.

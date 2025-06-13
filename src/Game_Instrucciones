@@ -1,0 +1,36 @@
+2.3. Clase Game
+
+La clase Game representa una partida de Conecta 4 entre dos jugadores mediante los
+siguientes atributos:
+
+● 1. Atributo status (String): Estado de la partida, que puede ser: IN_PROGRESS,
+VICTORY, o DRAW.
+
+● 2. Atributo winnerPlayerName (String): Nombre del jugador ganador, o un String
+vacío si el resultado fue un empate.
+
+● 3. Atributo playerNameA (String): nombre del jugador A.
+
+● 4. Atributo playerNameB (String): nombre del jugador B.
+
+● 5. Atributo ConnectFour (ConnectFour): Instancia de la clase ConnectFour que
+representa el tablero y la lógica del juego.
+
+
+Los métodos a implementar son:
+
+● 1. Método Game(String playerNameA, String playerNameB): Constructor que inicializa una
+nueva partida con los jugadores especificados. El estado (status) del juego una vez
+inicializado es IN_PROGRESS.
+
+● 2. Método play(): Ejecuta una partida de Conecta 4 en un ciclo hasta que exista un ganador
+o empate. En cada iteración se usa el método makeMove de la clase ConnectFour para
+realizar un movimiento y el método isGameOver para verificar el estado del juego después
+de realizar el movimiento. Este método actualiza el estado del juego (status) a VICTORY o
+DRAW, según corresponda, registra el resultado (winnerPlayerName) y retorna el nombre
+del ganador o un String vacío en caso de empate. Para interactuar con la instancia de
+ConnectFour, dentro de este método los jugadores realizan ingreso de la columna en la que
+desean insertar sus símbolos mediante stdin (System.in en Java). Se recomienda que los
+estudiantes impriman cada estado de Conecta 4: qué jugador debe ingresar su símbolo y el
+estado actual del tablero para interactuar de la mejor forma posible (tienen libertad para ser
+creativos en este punto).

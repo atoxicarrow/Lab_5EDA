@@ -1,0 +1,23 @@
+2.1. Clase Player
+La clase Player representa a un jugador de Conecta 4 mediante los siguientes atributos:
+
+● 1. Atributo playerName (String): Nombre del jugador, usado como identificador único.
+
+● 2. Atributo wins (int): Número de partidas ganadas por el jugador.
+
+● 3. Atributo draws (int): Número de partidas empatadas por el jugador.
+
+● 4. Atributo losses (int): Número de partidas perdidas por el jugador.
+
+Los métodos a implementar son los siguientes:
+
+● 1. Método addWin(): Incrementa en 1 el número de partidas ganadas por el jugador.
+
+● 2. Método addDraw(): Incrementa en 1 el número de partidas empatadas por el
+jugador.
+
+● 3. Método addLoss(): Incrementa en 1 el número de partidas perdidas por el jugador.
+
+● 4. Método winRate(): Retorna el porcentaje de victorias del jugador entre todas las
+partidas jugadas como un valor decimal entre 0 y 1. Si el jugador no ha participado
+en ninguna partida, debe retornar 0.

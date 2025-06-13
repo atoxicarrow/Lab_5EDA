@@ -1,0 +1,39 @@
+2.2. Clase Scoreboard
+La clase Scoreboard gestiona el registro de jugadores y los resultados de las partidas
+mediante los siguientes atributos:
+
+● 1. Atributo winTree (BST<int, String>): Árbol binario de búsqueda que ordena a los
+jugadores por su número de victorias. La llave es el número de victorias, y el valor es
+el nombre del jugador (playerName).
+
+● 2. Atributo players (HashST<String, Player>): Tabla de hash que asocia el nombre
+de un jugador (playerName) con su instancia de la clase Player. Esta tabla de hash
+es la que lleva registro de los jugadores.
+
+● 3. Atributo playedGames (int): Número total de partidas jugadas registradas en el
+sistema. Es un contador que inicializa en cero.
+
+
+Los métodos a implementar son:
+
+● 1. Método addGameResult(String winnerPlayerName, String looserPlayerName,
+boolean draw): Registrael resultado de una partida, actualizando las estadísticas de
+los jugadores involucrados y el árbol binario de búsqueda (winTree).
+
+● 2. Método registerPlayer(String playerName): Registra un nuevo jugador en el
+sistema, agregándolo a la tabla de hash players. Si el jugador ya existe, no lo
+registra nuevamente.
+
+● 3. Método checkPlayer(String playerName): Verifica si un jugador con el nombre
+dado (playerName) está registrado en el sistema (lo busca en la tabla de hash
+players).
+
+● 4. Método winRange(int lo, int hi): Retorna un arreglo (Player[]) con los jugadores
+que tienen un número de victorias menor o igual que lo y mayor o igual que hi.
+
+● 5. Método winSuccessor(int wins): Retorna un arreglo de jugadores (Player[]) con el
+número de victorias mayor más cercano al valor especificado (wins). Se retorna un
+arreglo porque podrían ser múltiples jugadores con la misma cantidad de victorias.
+Por ejemplo, si el árbol contiene las llaves 4, 6, 8, 9, 12, el sucesor de 9 es 12
+puesto que es el número mayor más cercano a 9. Cuando no exista sucesor, el
+método debe retornar un arreglo vacío.
