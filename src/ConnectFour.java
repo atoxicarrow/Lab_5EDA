@@ -16,7 +16,7 @@ public class ConnectFour {
 
     boolean makeMove(int z){
         if (z<0 || z>7){  // verifica si el usuario selecciono
-                        // una columna entre 0 y 6, porque el juego ql tiene 6 colunnas nomas
+            // una columna entre 0 y 6, porque el juego ql tiene 6 colunnas nomas
             return false;
         }
 
@@ -92,18 +92,18 @@ public class ConnectFour {
         }
 
 
-       //verifica empate
+        //verifica empate
         boolean isFull = true;
-            for (int col = 0; col < 7; col++) {
-                if (grid[col][5] == ' ') {
-                    isFull = false;
-                    break;
-                }
+        for (int col = 0; col < 7; col++) {
+            if (grid[col][5] == ' ') {
+                isFull = false;
+                break;
             }
-            if (isFull) {
-                return 3;
-            }
-            return 0;
+        }
+        if (isFull) {
+            return 3;
+        }
+        return 0;
     }
 
-}
+} //test gdeithub

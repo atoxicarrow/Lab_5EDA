@@ -6,7 +6,7 @@ siguientes atributos:
 ● 1. Atributo status (String): Estado de la partida, que puede ser: IN_PROGRESS,
 VICTORY, o DRAW.
 
-● 2. Atributo winnerPlayerName (String): Nombre del jugador ganador, o un String
+● 2. Atributo winnerPl  ayerName (String): Nombre del jugador ganador, o un String
 vacío si el resultado fue un empate.
 
 ● 3. Atributo playerNameA (String): nombre del jugador A.
