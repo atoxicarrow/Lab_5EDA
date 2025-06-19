@@ -4,7 +4,7 @@ public class ConnectFour {
     char currentSymbol;
 
     //metodos;
-    ConnectFour(){
+    public ConnectFour(){
         for(int i =0; i<7; i++){
             for(int j=0; j<6; j++){
                 grid[i][j] = ' ';
@@ -14,8 +14,8 @@ public class ConnectFour {
         this.currentSymbol = 'X';
     }
 
-    boolean makeMove(int z){
-        if (z<0 || z>7){  // verifica si el usuario selecciono
+    public boolean makeMove(int z){
+        if (z<0 || z>=7){  // verifica si el usuario selecciono
             // una columna entre 0 y 6, porque el juego ql tiene 6 colunnas nomas
             return false;
         }
@@ -33,59 +33,60 @@ public class ConnectFour {
                 return true;
             }
         }
-        return true;
+        return false;
     }
-    public int isGameOver(){
-        //verificar si hay 4 fichas iguales horizontalmente
-        for (int Filas = 0; Filas < 6; Filas++){
-            for (int Columnas = 0; Columnas < 4; Columnas++){
-                if (grid[Filas][Columnas] == ' ' && grid[Filas][Columnas+1] == ' ' && grid[Filas+2][Columnas]   == ' ' && grid[Filas+3][Columnas] == ' ' ){
-                    if (grid[Columnas][Filas] == 'X') {
+    public int isGameOver() {
+        // }horizontal
+        for (int Fila = 0; Fila < 6; Fila++) {
+            for (int Columna = 0; Columna < 4; Columna++) {
+                if (grid[Columna][Fila] != ' ' && grid[Columna][Fila] == grid[Columna+1][Fila] && grid[Columna][Fila] == grid[Columna+2][Fila] && grid[Columna][Fila] == grid[Columna+3][Fila]) {
+                    if (grid[Columna][Fila] == 'X') {
                         return 1;  // Gana X
-                    } else {
-                        return 2;  // Gana O
                     }
-                }
-            }
-        }
-        //verifica iguales verticalmente
-        for (int Columnas = 0; Columnas < 6; Columnas++){
-            for (int Filas = 0; Filas < 4; Filas++){
-                if (grid [Columnas][Filas] == ' ' && grid [Columnas][Filas+1] == ' ' && grid [Columnas][Filas+2] == ' ' && grid [Columnas][Filas+3] == ' '){
-                    if (grid[Columnas][Filas] == 'X') {
-                        return 1;  // Gana X
-                    } else {
+                    if (grid[Columna][Fila] == 'O') {
                         return 2;  // Gana O
                     }
                 }
             }
         }
 
-        for (int Columnas = 0; Columnas < 4; Columnas++) {
-            for (int Filas = 0; Filas < 3; Filas++) {
-                if (grid[Columnas][Filas] != ' ' &&
-                        grid[Columnas][Filas] == grid[Columnas+1][Filas+1] &&
-                        grid[Columnas][Filas] == grid[Columnas+2][Filas+2] &&
-                        grid[Columnas][Filas] == grid[Columnas+3][Filas+3]) {
-                    if (grid[Columnas][Filas] == 'X') {
-                        return 1;  // Gana X
-                    } else {
-                        return 2;  // Gana O
+        // verticalmente
+        for (int Columna = 0; Columna < 7; Columna++) {
+            for (int Fila = 0; Fila < 3; Fila++) {
+                if (grid[Columna][Fila] != ' ' && grid[Columna][Fila] == grid[Columna][Fila+1] && grid[Columna][Fila] == grid[Columna][Fila+2] && grid[Columna][Fila] == grid[Columna][Fila+3]) {
+                    if (grid[Columna][Fila] == 'X') {
+                        return 1;
+                    }
+                    if (grid[Columna][Fila] == 'O') {
+                        return 2;
                     }
                 }
             }
         }
 
-        for (int Columnas = 0; Columnas < 4; Columnas++) {
-            for (int Filas = 3; Filas < 6; Filas++) {
-                if (grid[Columnas][Filas] != ' ' &&
-                        grid[Columnas][Filas] == grid[Columnas+1][Filas-1] &&
-                        grid[Columnas][Filas] == grid[Columnas+2][Filas-2] &&
-                        grid[Columnas][Filas] == grid[Columnas+3][Filas-3]) {
-                    if (grid[Columnas][Filas] == 'X') {
-                        return 1;  // Gana X
-                    } else {
-                        return 2;  // Gana O
+        // diagonal \
+        for (int Columna = 0; Columna < 4; Columna++) {
+            for (int Fila = 0; Fila < 3; Fila++) {
+                if (grid[Columna][Fila] != ' ' && grid[Columna][Fila] == grid[Columna+1][Fila+1] && grid[Columna][Fila] == grid[Columna+2][Fila+2] && grid[Columna][Fila] == grid[Columna+3][Fila+3]) {
+                    if (grid[Columna][Fila] == 'X') {
+                        return 1;
+                    }
+                    if (grid[Columna][Fila] == 'O') {
+                        return 2;
+                    }
+                }
+            }
+        }
+
+        // diagonal /
+        for (int Columna = 3; Columna < 7; Columna++) {
+            for (int Fila = 0; Fila < 3; Fila++) {
+                if (grid[Columna][Fila] != ' ' && grid[Columna][Fila] == grid[Columna-1][Fila+1] && grid[Columna][Fila] == grid[Columna-2][Fila+2] && grid[Columna][Fila] == grid[Columna-3][Fila+3]) {
+                    if (grid[Columna][Fila] == 'X') {
+                        return 1;
+                    }
+                    if (grid[Columna][Fila] == 'O') {
+                        return 2;
                     }
                 }
             }
@@ -105,5 +106,20 @@ public class ConnectFour {
         }
         return 0;
     }
+    public char getCurrentSymbol() {
+        return currentSymbol;
+    }
+    public void ImprimirTablero() {
+        System.out.println("/0/1/2/3/4/5/6/");
 
-} //test gdeithub
+        for (int Fila = 5; Fila >= 0; Fila--) {
+            System.out.print("|");
+            for (int Columna = 0; Columna < 7; Columna++) {
+                System.out.print(grid[Columna][Fila] + "|");
+            }
+            System.out.println();
+        }
+        System.out.println("---------------");
+    }
+}
+
