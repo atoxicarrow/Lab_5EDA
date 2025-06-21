@@ -1,7 +1,7 @@
 public class ConnectFour {
     //Atributos
     char[][] grid = new char[7][6];
-    char currentSymbol;
+    private char currentSymbol;
 
     //metodos;
     public ConnectFour(){

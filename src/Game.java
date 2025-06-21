@@ -1,21 +1,29 @@
 import java.util.Scanner;
 
 public class Game {
-    String status;
-    String winnerPlayerName;
-    String playerNameA;
-    String playerNameB;
+    private String status;
+    private String winnerPlayerName;
+    private final String playerNameA;
+    private final String playerNameB;
     ConnectFour ConnectFour;
+    Scoreboard scoreboard;
 
-
-
-    Game(String playerNameA, String playerNameB){
+    Game(String playerNameA, String playerNameB, Scoreboard scoreboard) {
         this.playerNameA = playerNameA;
         this.playerNameB = playerNameB;
-        ConnectFour = new ConnectFour();
-        status = "IN_PROGRRES";
-        winnerPlayerName = "";
+        this.ConnectFour = new ConnectFour();
+        this.status = "IN_PROGRESS";
+        this.winnerPlayerName = "";
+        this.scoreboard = scoreboard;
+
+        if (!scoreboard.checkPlayer(playerNameA)) {
+            scoreboard.registerPlayer(playerNameA);
+        }
+        if (!scoreboard.checkPlayer(playerNameB)) {
+            scoreboard.registerPlayer(playerNameB);
+        }
     }
+
     private void mostrarTablero() {
         for (int Fila = 5; Fila >= 0; Fila--) {
             for (int Columna = 0; Columna < 7; Columna++) {
@@ -25,51 +33,80 @@ public class Game {
         }
     }
 
-    public String play(){
-        while(status.equals("IN_PROGRRES")){
+    private void mostrarEstadisticas() {
+        Player jugadorA = scoreboard.players.get(playerNameA);
+        Player jugadorB = scoreboard.players.get(playerNameB);
 
+        System.out.println("\n=== ESTADÍSTICAS DE JUGADORES ===");
+        System.out.println("Jugador\t\tVictorias\tEmpates\tDerrotas\t% Victorias");
+        System.out.printf("%s\t%d\t\t%d\t%d\t\t%.2f%%\n",
+                jugadorA.getPlayerName(),
+                jugadorA.getWins(),
+                jugadorA.getDraws(),
+                jugadorA.getLosses(),
+                jugadorA.winRate() * 100);
+
+        System.out.printf("%s\t%d\t\t%d\t%d\t\t%.2f%%\n",
+                jugadorB.getPlayerName(),
+                jugadorB.getWins(),
+                jugadorB.getDraws(),
+                jugadorB.getLosses(),
+                jugadorB.winRate() * 100);
+    }
+
+    public String play() {
+        while(status.equals("IN_PROGRESS")) {
             Scanner in = new Scanner(System.in);
             char currentSymbol = ConnectFour.getCurrentSymbol();
-            String currentPlayer;
-            if (currentSymbol == 'X') {
-                currentPlayer = playerNameA;
-            } else {
-                currentPlayer = playerNameB;
-            }
+            String currentPlayer = (currentSymbol == 'X') ? playerNameA : playerNameB;
+
             ConnectFour.ImprimirTablero();
-            System.out.print(currentPlayer + " (" + currentSymbol + "), ingrese columna (0-6): ");
-            int Columna = in.nextInt();
-            if (!ConnectFour.makeMove(Columna)) {
-                System.out.println("Movimiento inválido. Intente de nuevo.");
+            System.out.print(currentPlayer + " (" + currentSymbol + "), ingrese columna (0-6) o 'estadisticas': ");
+            String input = in.nextLine();
+
+            if (input.equalsIgnoreCase("estadisticas")) {
+                mostrarEstadisticas();
                 continue;
             }
 
-            int gameResult = ConnectFour.isGameOver();
-            if (gameResult == 1) {
-                status = "VICTORY";
-                winnerPlayerName = playerNameA;
-            }
-            if (gameResult == 2) {
-                status = "VICTORY";
-                winnerPlayerName = playerNameB;
-            }
-            if (gameResult == 3) {
-                status = "DRAW";
-                winnerPlayerName = "";
+            try {
+                int Columna = Integer.parseInt(input);
+                if (!ConnectFour.makeMove(Columna)) {
+                    System.out.println("Movimiento inválido. Intente de nuevo.");
+                    continue;
+                }
+
+                int gameResult = ConnectFour.isGameOver();
+                if (gameResult == 1) {
+                    status = "VICTORY";
+                    winnerPlayerName = playerNameA;
+                } else if (gameResult == 2) {
+                    status = "VICTORY";
+                    winnerPlayerName = playerNameB;
+                } else if (gameResult == 3) {
+                    status = "DRAW";
+                    winnerPlayerName = "";
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Intente de nuevo.");
             }
         }
 
-        // Mostrar resultado final
         if (status.equals("VICTORY")) {
+            String perdedor = winnerPlayerName.equals(playerNameA) ? playerNameB : playerNameA;
+            scoreboard.addGameResult(winnerPlayerName, perdedor, false);
             System.out.println("¡Ganador: " + winnerPlayerName + "!");
-            ConnectFour.ImprimirTablero();
         } else {
+            scoreboard.addGameResult(playerNameA, playerNameB, true);
             System.out.println("¡Empate!");
-            ConnectFour.ImprimirTablero();
         }
+
+        ConnectFour.ImprimirTablero();
+        mostrarEstadisticas();
 
         return winnerPlayerName;
     }
+
     public String getStatus() {
         return status;
     }
@@ -78,7 +115,3 @@ public class Game {
         return winnerPlayerName;
     }
 }
-
-
-
-

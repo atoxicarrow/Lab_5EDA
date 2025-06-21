@@ -1,9 +1,9 @@
 public class Player {
     //Atributos
     String playerName;
-    int wins;
-    int draws;
-    int losses;
+    private int wins;
+    private int draws;
+    private int losses;
 
     //Metodos
     public Player(String playerName) {
